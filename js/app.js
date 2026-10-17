@@ -201,6 +201,9 @@
     document.body.classList.remove('flash'); void document.body.offsetWidth; document.body.classList.add('flash');
     Scene.toBlob(blob => {
       if (!blob) return;
+      // Quand le téléchargement est bloqué (page intégrée), on montre l'image
+      // pour un enregistrement manuel (clic droit ou appui long).
+      if (window.SAVE_AS_PREVIEW) { showSaved(blob); return; }
       const d = new Date(), z = n => String(n).padStart(2, '0');
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -210,6 +213,16 @@
     });
     input.focus();
   });
+
+  const saved = document.getElementById('saved');
+  function showSaved(blob) {
+    const img = saved.querySelector('img');
+    if (img.src) URL.revokeObjectURL(img.src);
+    img.src = URL.createObjectURL(blob);
+    saved.showModal();
+  }
+  saved.addEventListener('click', e => { if (e.target === saved || e.target.closest('.close')) saved.close(); });
+  saved.addEventListener('close', () => input.focus());
 
   // Deux appuis pour tout effacer : un clic égaré ne détruit pas le dessin.
   let clearArmed = null;
