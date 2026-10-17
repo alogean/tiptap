@@ -16,6 +16,7 @@
     <button id="btn-book" type="button" aria-pressed="false"><span class="ico">📖</span><span class="txt">Imagier</span></button>
     <button id="btn-sound" type="button" aria-pressed="false"><span class="ico">🔊</span><span class="txt">Son</span></button>
     <button id="btn-save" type="button"><span class="ico">📷</span><span class="txt">Sauvegarder</span></button>
+    <button id="btn-magic" type="button" aria-pressed="false"><span class="ico">✨</span><span class="txt">Magie</span></button>
     <button id="btn-clear" type="button"><span class="ico">🧹</span><span class="txt">Tout effacer</span></button>
   </nav>
 
@@ -47,10 +48,32 @@
     <p>Clic droit ou appui long sur l'image pour l'enregistrer.</p>
   </dialog>
 
+  <dialog id="magic" aria-labelledby="magic-title">
+    <header>
+      <h2 id="magic-title">✨ Magie</h2>
+      <button class="close" type="button" aria-label="Fermer">✕</button>
+    </header>
+    <form>
+      <p>Avec une clé Gemini, n'importe quel mot inconnu suivi de <kbd>Entrée</kbd> est dessiné par l'IA, puis ajouté à l'imagier.</p>
+      <label for="magic-key">Clé API Gemini</label>
+      <input id="magic-key" type="password" autocomplete="off" spellcheck="false" placeholder="AIza…">
+      <label for="magic-model">Modèle</label>
+      <input id="magic-model" type="text" autocomplete="off" spellcheck="false">
+      <p class="note">La clé reste dans ce navigateur et part uniquement vers Google. Obtenir une clé :
+        <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></p>
+      <p id="magic-status" class="note" aria-live="polite"></p>
+      <div class="actions">
+        <button id="magic-forget" type="button">Oublier la clé</button>
+        <button type="submit" class="primary">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
   <script src="js/words.js"></script>
   <script src="js/draw.js"></script>
   <script src="js/scene.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/magic.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

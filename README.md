@@ -15,7 +15,27 @@ Ouvrir `index.html` dans un navigateur. Aucune installation, aucune dépendance.
 | `js/draw.js`    | Dessin procédural de chaque élément + propriétés (zone, vitesse…) |
 | `js/scene.js`   | État de la scène, animation, météo, rendu Canvas               |
 | `js/audio.js`   | Signal sonore, voix (synthèse vocale fr-FR), musique           |
-| `js/app.js`     | Saisie, imagier, barre d'actions                               |
+| `js/magic.js`   | Mots inventés : dessin SVG par Gemini, nettoyage, mémorisation |
+| `js/app.js`     | Saisie, imagier, barre d'actions, réglage « Magie »          |
+
+## Magie : n'importe quel mot avec Gemini
+
+Bouton **✨ Magie** → coller une clé API Gemini ([aistudio.google.com/apikey](https://aistudio.google.com/apikey)).
+Ensuite, un mot inconnu suivi de **Entrée** est dessiné par Gemini en SVG
+(`js/magic.js`) et devient un élément comme les autres : zone (sol, ciel, eau,
+surface), déplacement, couleurs, tailles, `beaucoup`, actions.
+
+- Les créations sont gardées dans le navigateur (`localStorage`) et apparaissent
+  dans l'imagier sous « Mes créations » (✕ pour en oublier une). Un mot déjà
+  créé ne refait pas d'appel.
+- Le SVG reçu est nettoyé (liste blanche d'éléments, ni script, ni attribut
+  `on*`, ni lien externe) puis affiché comme image.
+- Gemini doit refuser les mots inadaptés aux jeunes enfants (consigne du prompt,
+  en plus des filtres de Google).
+- **La clé vit dans le navigateur.** Parfait pour un usage familial ; pour une
+  mise en ligne publique, il faudra un petit serveur relais qui garde la clé.
+  Dans la console Google Cloud, restreindre la clé à l'API Gemini.
+- Modèle par défaut : `gemini-flash-latest` (modifiable dans le réglage).
 
 ## Ajouter un mot
 
